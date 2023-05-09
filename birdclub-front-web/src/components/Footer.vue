@@ -1,15 +1,17 @@
 <template>
-    <div>
-        底部
+    <div class="content">
+        @birdclub
     </div>
 </template>
 
 <script>
-export default {
 
-}
 </script>
 
-<style>
+<style lang="scss">
+.content {
+    margin: 30px 0;
+    text-align: center;
+}
 
 </style>

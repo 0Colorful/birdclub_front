@@ -179,7 +179,7 @@ const { proxy } = getCurrentInstance();
 
 const api = {
     checkCode: "/verifyCode",
-    sendEmailCode: "/sendEmailCode"
+    sendEmailCode: "/sendVerifyEmail"
 };
 
 //0：注册，1：登录，2：找回密码

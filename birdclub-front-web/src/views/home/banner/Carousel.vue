@@ -23,7 +23,8 @@
 <style lang="scss" scoped>
 
 .carousel {
-    margin: 20px 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     .carousel-content {
         width: 100%;
         max-height: 640px;

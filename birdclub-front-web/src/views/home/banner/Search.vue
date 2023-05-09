@@ -38,7 +38,6 @@ const select = ref('1')
 
 <style lang="scss" scoped>
 .midDiv {
-    margin: 0 30px;
     background-color: rgb(255, 255, 255);
     .input-with-select {
         margin: 10px 30px;

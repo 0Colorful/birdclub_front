@@ -5,7 +5,7 @@
             <Header></Header>
         </div>
 
-        <div>
+        <div class="body-content">
             <router-view></router-view>
         </div>        
 
@@ -28,6 +28,12 @@ import Footer from '@/components/Footer.vue'
 </script>
 
 <style lang="scss">
+body {
+    background-color: rgb(242, 242, 242);
+}
 
+.body-content {
+    margin: 0 30px;
+}
 
 </style>
