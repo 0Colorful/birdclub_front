@@ -29,7 +29,7 @@
                     </el-input>
                 </el-form-item>
                 <!-- 登录密码 -->
-                <el-form-item prop="password" v-show="opType == 1">
+                <el-form-item prop="password" v-if="opType == 1">
                     <el-input
                         size="large"
                         type="password"
@@ -45,7 +45,7 @@
                 </el-form-item>
 
                 <!-- 注册 -->
-                <div v-show="opType == 0 || opType == 2">
+                <div v-if="opType == 0 || opType == 2">
                     <el-form-item prop="emailCode">
                         <div class="send-email-panel">
                             <el-input
@@ -61,7 +61,7 @@
                             <el-button type="primary" size="large" class="sendEmail-btn" @click="showSendMailDialog">获取邮箱验证码</el-button>
                         </div>
                     </el-form-item>
-                    <el-form-item prop="nickName" v-show="opType == 0">
+                    <el-form-item prop="nickName" v-if="opType == 0">
                         <el-input
                             size="large"
                             clearable
@@ -117,7 +117,7 @@
                                 <span><el-icon><CircleCheck /></el-icon></span>
                             </template>
                         </el-input>
-                        <img src="checkCodeUrl" class="check-code" @click="changeCheckCode(0)">
+                        <img :src="checkCodeUrl" class="check-code" @click="changeCheckCode(0)">
                     </div>
                 </el-form-item>
                 <el-form-item v-if="opType == 1">
@@ -165,7 +165,7 @@
                                 <span><el-icon><CircleCheck /></el-icon></span>
                             </template>
                         </el-input>
-                        <img src="checkCodeUrl4SendMailCode" class="check-code" @click="changeCheckCode(1)">
+                        <img :src="checkCodeUrl4SendMailCode" class="check-code" @click="changeCheckCode(1)">
                     </div>
                 </el-form-item>
         </el-form>
@@ -178,7 +178,7 @@ import { getCurrentInstance, nextTick, reactive, ref} from 'vue'
 const { proxy } = getCurrentInstance();
 
 const api = {
-    checkCode: "/verifyCode",
+    checkCode: "/api/verifyCode",
     sendEmailCode: "/sendVerifyEmail"
 };
 
@@ -199,6 +199,7 @@ const changeCheckCode = (type) => {
     } else {
         checkCodeUrl4SendMailCode.value = api.checkCode + "?type=" + type + "&time=" + new Date().getTime();
     }
+    console.log(checkCodeUrl)
 };
 
 //检验注册重复输入的密码
@@ -311,6 +312,7 @@ const resetForm = () => {
     nextTick(() =>{
         changeCheckCode(0);
         formDataRef.value.resetFields();
+        formData.value = {};
     });
 };
 

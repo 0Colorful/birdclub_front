@@ -1,12 +1,12 @@
 <template>
     <div class="main-content">
         <el-row :gutter="20" class="article-content">
-            <el-col :span="15">
+            <el-col :span="16">
                 <div class="general-area left-area">
                     <div class="titleDiv"><div class="titleText">最新文章</div></div>
                 </div>
             </el-col>
-            <el-col :span="9">
+            <el-col :span="8">
                 <div class="general-area right-area">
                     <div class="titleDiv"><div class="titleText">热门文章</div></div>
                 </div>
