@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ElLoading } from 'element-plus'
 import Message from '@/utils/Message'
+import store from '@/store';
 
 const contentTypeForm = "application/x-www-form-urlencoded;charset=UTF-8";
 const contentTypeJson = "application/json";
@@ -8,7 +9,7 @@ const contentTypeJson = "application/json";
 
 const instance = axios.create({
     baseURL: "/api",
-    timeout: 5000,
+    timeout: 30 * 1000,
 })
 
 //请求前过滤器
@@ -19,8 +20,13 @@ instance.interceptors.request.use(
             loading = ElLoading.service({
                 lock: true,
                 text: "加载中......",
-                background: 'rbga(0,0,0,0,7)'
+                background: 'rgba(0,0,0,0.7)'
             })
+        }
+        console.log("store" + store.state)
+        if(store.state.uuid_token){
+            //请求头添加一个字段uuid
+            config.headers.uuid = store.state.uuid_token
         }
         return config;
     }, (error) => {
@@ -39,8 +45,20 @@ instance.interceptors.response.use(
         if (showLoading && loading) {
             loading.close();
         }
+        const responseData = response.data;
+        if (responseData.code == 200 || responseData.code == 250) {
+            return responseData.code;
+        } else {
+            if (errorCallback) {
+                errorCallback(responseData)
+            }
+            return Promise.reject({showError: showError, msg: responseData.data})
+        }
     }, (error) => {
-        console.log(error)
+        if (error.config.showLoading && loading) {
+            loading.close();
+        }
+        return Promise.reject({showError: true, msg: "网络异常"})
     }
 );
 
